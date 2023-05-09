@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Decision {
+  id            String @id @default(uuid())
+  title         String
+  description   String
+}
+
+model Answer {
+  id        Int @id @default(autoincrement())
+  name      String
+}
