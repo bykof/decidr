@@ -36,4 +36,6 @@ model Answer {
 
   decision   Decision @relation(fields: [decisionId], references: [id])
   decisionId String
+
+  @@unique([decisionId, name])
 }
