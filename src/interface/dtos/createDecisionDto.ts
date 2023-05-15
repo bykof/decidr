@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { Prisma } from '@prisma/client';
+import { BaseDto } from './baseDto';
 
-export class CreateDecisionDto {
+export class CreateDecisionDto extends BaseDto<CreateDecisionDto> {
   @ApiProperty({ required: true })
   @IsString()
   @IsNotEmpty()

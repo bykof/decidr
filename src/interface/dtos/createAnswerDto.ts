@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { AnswerType } from '../../core/domain/answerType';
+import { BaseDto } from './baseDto';
 
-export default class CreateAnswerDto {
+export default class CreateAnswerDto extends BaseDto<CreateAnswerDto> {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()

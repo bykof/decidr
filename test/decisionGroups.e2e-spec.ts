@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../src/app.module';
+import { PrismaClientService } from '../src/core/services/prismaClientService';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -14,11 +15,12 @@ describe('AppController (e2e)', () => {
     app = moduleFixture.createNestApplication();
     await app.init();
   });
+  afterAll(async () => {
+    const prismaClientService = app.get(PrismaClientService);
+    await prismaClientService.prismaClient.decisionGroup.deleteMany();
+  });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/decision-groups (POST)', () => {
+    return request(app.getHttpServer()).post('/decision-groups').expect(201);
   });
 });
